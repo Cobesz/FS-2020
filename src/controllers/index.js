@@ -1,14 +1,9 @@
 const express = require('express')
     , router = express.Router();
 
-router.use('/api/todos', require('./todos'));
+const apiUrl = '/api/';
 
-router.get('/', function (req, res) {
-    res.send('Home page')
-});
+router.use(apiUrl + 'todos', require('./todos'));
 
-router.get('/about', function (req, res) {
-    res.send('Learn about us')
-});
 
 module.exports = router;

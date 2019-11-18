@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
 
 // get todo collection
 router.get('/', (req, res) => {
+
     res.status(200).send({
         success: 'true',
         message: 'todos retrieved successfully',
@@ -123,17 +124,5 @@ router.put('/:id', (req, res) => {
         updatedTodo,
     });
 });
-//
-//
-// Car brands page
-// router.get('/brands', function (req, res) {
-//     res.send('Audi, BMW, Mercedes')
-// })
-//
-// // Car models page
-//
-// router.get('/models', function (req, res) {
-//     res.send('Audi Q7, BMW X5, Mercedes GL')
-// })
 
 module.exports = router;

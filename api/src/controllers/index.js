@@ -5,5 +5,4 @@ const apiUrl = '/api/';
 
 router.use(apiUrl + 'todos', require('./todos'));
 
-
 module.exports = router;

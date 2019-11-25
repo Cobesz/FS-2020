@@ -2,7 +2,7 @@ import passport from "passport";
 import {BasicStrategy} from "passport-http";
 
 // Load required packages
-import User from "../../models/user";
+import User from "../models/user";
 
 
 passport.use(new BasicStrategy(

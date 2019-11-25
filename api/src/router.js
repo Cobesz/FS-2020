@@ -1,7 +1,7 @@
 import express from "express";
 import * as beerController from "./controllers/beer";
 import * as userController from "./controllers/user";
-import * as authController from "./controllers/authorisation/auth";
+import * as authController from "./controllers/auth";
 
 const router = express.Router();
 

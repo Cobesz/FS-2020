@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import db from '../../db/db';
+import db from '../db/db';
 
 //create item
 router.post('/', (req, res) => {

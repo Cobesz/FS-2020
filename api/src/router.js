@@ -7,14 +7,14 @@ const router = express.Router();
 
 // Create endpoint handlers for /beers
 router.route('/beers')
-    .post(authController.isAuthenticated, beerController.postBeers)
-    .get(authController.isAuthenticated, beerController.getBeers);
+    .post(beerController.postBeers)
+    .get(beerController.getBeers);
 
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')
-    .get(authController.isAuthenticated, beerController.getBeer)
-    .put(authController.isAuthenticated, beerController.putBeer)
-    .delete(authController.isAuthenticated, beerController.deleteBeer);
+    .get(beerController.getBeer)
+    .put(beerController.putBeer)
+    .delete(beerController.deleteBeer);
 
 // Create endpoint handlers for /users
 router.route('/users')

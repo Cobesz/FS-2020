@@ -2,6 +2,7 @@ import express from "express";
 import * as beerController from "./controllers/beer";
 import * as userController from "./controllers/user";
 import * as authController from "./controllers/auth";
+import * as clientController from "./controllers/client";
 
 const router = express.Router();
 
@@ -19,6 +20,11 @@ router.route('/beers/:beer_id')
 // Create endpoint handlers for /users
 router.route('/users')
     .post(userController.postUsers)
-    .get(authController.isAuthenticated, userController.getUsers);
+    .get(authController.isBearerAuthenticated, userController.getUsers);
+
+// Create endpoint handlers for /clients
+router.route('/clients')
+    .post(authController.isAuthenticated, clientController.postClients)
+    .get(authController.isAuthenticated, clientController.getClients);
 
 module.exports = router;

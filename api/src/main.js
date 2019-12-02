@@ -1,19 +1,26 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+// Load required packages
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import router from "./router";
 
+// Connect to the beerlocker MongoDB
+mongoose.connect('mongodb://localhost:27017/beerlocker');
 
-// Set up the express app
+const port = 3000;
+
+// Create our Express application
 const app = express();
 
-// Parse incoming requests data
+// Use the body-parser package in our application
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.use(require('./controllers'));
+// Register all our routes with /api
+app.use('/api', router);
 
-
-const PORT = 3000;
-
-app.listen(PORT, () => {
-    console.log(`server running on port ${PORT}`)
-});
+// Start the server
+app.listen(port);
+console.log(`Listening on port ${port}`);

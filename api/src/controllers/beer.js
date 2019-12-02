@@ -1,10 +1,10 @@
 // Load required packages
-import Beer from "../models/beer";
+var Beer = require('../models/beer');
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function(req, res) {
     // Create a new instance of the Beer model
-    const beer = new Beer();
+    var beer = new Beer();
 
     // Set the beer properties that came from the POST data
     beer.name = req.body.name;
@@ -24,6 +24,7 @@ exports.postBeers = function(req, res) {
 // Create endpoint /api/beers for GET
 exports.getBeers = function(req, res) {
     // Use the Beer model to find all beer
+    console.log(req.user);
     Beer.find({ userId: req.user._id }, function(err, beers) {
         if (err)
             res.send(err);

@@ -7,10 +7,10 @@ const router = express.Router();
 
 // Create endpoint handlers for /beers
 router.route('/beers')
-    .post(beerController.postBeers)
+    .post(authController.isAuthenticated, beerController.postBeers)
     .get(authController.isAuthenticated, beerController.getBeers);
 
-//Create endpoint handlers for /beers/:beer_id
+// Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')
     .get(authController.isAuthenticated, beerController.getBeer)
     .put(authController.isAuthenticated, beerController.putBeer)

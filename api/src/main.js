@@ -7,7 +7,7 @@ import router from "./router";
 // Connect to the beerlocker MongoDB
 mongoose.connect('mongodb://localhost:27017/beerlocker');
 
-const port = 3000;
+const port = 8000;
 
 // Create our Express application
 const app = express();

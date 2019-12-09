@@ -44,7 +44,22 @@ exports.getBeers = function (req, res) {
         if (err)
             res.send(err);
 
-        res.json(beers);
+        let items= [];
+        for(let i = 0; i < beers.length; i++) {
+            let item = beers[i].toJSON();
+            item._links = {};
+            items.push(item);
+        }
+        let collection = {
+            items: items,
+            _links: {
+                self: {
+                    href: req.protocol + '://' + req.get('host') + req.originalUrl
+                }
+            },
+            pagination: 'hele dikke paginatie bla'
+        }
+        res.json(collection);
     });
 };
 

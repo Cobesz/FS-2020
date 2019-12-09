@@ -7,7 +7,6 @@ const router = express.Router();
 
 // Create endpoint handlers for /beers
 router.route('/beers')
-    // .options(beerController.options)
     .post(beerController.postBeers)
     .get(beerController.getBeers);
 

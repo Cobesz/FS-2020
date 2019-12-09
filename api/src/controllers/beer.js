@@ -10,6 +10,7 @@ exports.options = function (req, res, next) {
     if ('OPTIONS' === req.method) {
         //respond with 200
         res.send(200);
+        next();
     } else {
         //move on
         next();

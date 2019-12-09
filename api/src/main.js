@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import router from "./router";
+import cors from "cors";
 
 // Connect to the beerlocker MongoDB
 mongoose.connect('mongodb://localhost:27017/beerlocker');
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(cors())
 // Register all our routes with /api
 app.use('/api', router);
 

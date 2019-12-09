@@ -19,14 +19,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.options("/*", function(req, res, next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    res.send(200);
-})
-
-
 app.use(paginate.middleware(10, 50));
 // Register all our routes with /api
 app.use('/api', router);

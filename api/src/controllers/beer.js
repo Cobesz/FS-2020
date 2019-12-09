@@ -2,15 +2,14 @@
 import Beer from "../models/beer";
 
 
+exports.options = function (req, res, next) {
 
-// exports.options = function (req, res, next) {
-//
-//     //intercepts OPTIONS method
-//
-//     //respond with 200
-//     res.send(200);
-//     next();
-// };
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.send(200);
+
+};
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function (req, res) {

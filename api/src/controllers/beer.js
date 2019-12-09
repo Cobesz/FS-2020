@@ -35,7 +35,7 @@ exports.postBeers = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.json({message: 'Beer added to the locker!', data: beer});
+            res.send(beer);
         }
     });
 };

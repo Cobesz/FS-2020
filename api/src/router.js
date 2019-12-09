@@ -6,13 +6,10 @@ import * as authController from "./controllers/auth";
 const router = express.Router();
 
 // Create endpoint handlers for /beers
-router.route('/beers')
-    .options(beerController.options)
-    .post(beerController.postBeers);
-
 router.route('/beers/:start?/:limit?')
     .options(beerController.options)
     .get(beerController.getBeers)
+    .post(beerController.postBeers);
 
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')

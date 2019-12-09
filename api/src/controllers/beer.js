@@ -88,47 +88,6 @@ exports.getBeers = function (req, res, next) {
                 });
         });
 };
-//     function(err, count) {
-//     if (err) return next(err);
-//
-//     res.render('main/products', {
-//         products: products,
-//         current: page,
-//         pages: Math.ceil(count / perPage)
-//     })
-// }
-//     )
-// })
-// }
-
-//     function (req, res) {
-//     // Use the Beer model to find all beer
-//     Beer.find(function (err, beers) {
-//         if (err)
-//             res.send(err);
-//
-//         let items = [];
-//         for (let i = 0; i < beers.length; i++) {
-//             let item = beers[i].toJSON();
-//             item._links = {
-//                 self: {
-//                     href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
-//                 }
-//             };
-//             items.push(item);
-//         }
-//         let collection = {
-//             items: items,
-//             _links: {
-//                 self: {
-//                     href: req.protocol + '://' + req.get('host') + req.originalUrl
-//                 }
-//             },
-//             pagination: 'hele dikke paginatie bla'
-//         };
-//         res.json(collection);
-//     });
-// };
 
 // Create endpoint /api/beers/:beer_id for GET
 exports.getBeer = function (req, res) {

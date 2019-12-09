@@ -13,13 +13,22 @@ const port = 8000;
 // Create our Express application
 const app = express();
 
+const corsOptions = {
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+};
+
 // Use the body-parser package in our application
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(cors());
+
+
+app.use(cors(corsOptions));
 app.use(paginate.middleware(10, 50));
 // Register all our routes with /api
 app.use('/api', router);

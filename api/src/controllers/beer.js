@@ -1,5 +1,5 @@
 // Load required packages
-const Beer = require('../models/beer');
+import Beer from "../models/beer";
 
 exports.options = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -11,26 +11,32 @@ exports.options = function (req, res, next) {
     //respond with 200
     res.send(200);
     next();
-
 };
-
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function (req, res) {
+
     // Create a new instance of the Beer model
     const beer = new Beer();
 
+
     // Set the beer properties that came from the POST data
-    beer.name = req.body.name;
-    beer.type = req.body.type;
-    beer.quantity = req.body.quantity;
+    beer.items[0] = {
+        name: req.body.name,
+        type: req.body.type,
+        quantity: req.body.quantity
+    };
+
+    beer.pagination = 'Dikke pagination bla';
+    beer._links.self.href = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     // Save the beer and check for errors
     beer.save(function (err) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({message: 'Beer added to the locker!', data: beer});
+        } else {
+            res.json({message: 'Beer added to the locker!', data: beer});
+        }
     });
 };
 

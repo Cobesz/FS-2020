@@ -36,34 +36,91 @@ exports.postBeers = function (req, res) {
 };
 
 // Create endpoint /api/beers for GET
-exports.getBeers = function (req, res) {
-    // Use the Beer model to find all beer
-    Beer.find(function (err, beers) {
-        if (err)
-            res.send(err);
+exports.getBeers = function (req, res, next) {
+    const perPage = 2;
+    const page = req.params.page || 1;
 
-        let items = [];
-        for (let i = 0; i < beers.length; i++) {
-            let item = beers[i].toJSON();
-            item._links = {
-                self: {
-                    href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
-                }
-            };
-            items.push(item);
-        }
-        let collection = {
-            items: items,
-            _links: {
-                self: {
-                    href: req.protocol + '://' + req.get('host') + req.originalUrl
-                }
-            },
-            pagination: 'hele dikke paginatie bla'
-        };
-        res.json(collection);
-    });
+    Beer.find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function (err, beers) {
+            Beer.count().exec(
+                function (err, count) {
+                    if (err)
+                        res.send(err);
+
+                    let items = [];
+                    for (let i = 0; i < beers.length; i++) {
+                        let item = beers[i].toJSON();
+                        item._links = {
+                            self: {
+                                href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
+                            }
+                        };
+                        items.push(item);
+                    }
+                    let collection = {
+                        items: items,
+                        _links: {
+                            self: {
+                                href: req.protocol + '://' + req.get('host') + req.originalUrl
+                            }
+                        },
+                        pagination: {
+                            currentPage: page,
+                            currentItems: perPage,
+                            totalPages: Math.ceil(count / perPage),
+                            totalItems: count
+                        }
+                    };
+                    if (err) {
+                        return next(err)
+                    } else
+                        res.json(collection);
+                });
+        });
 };
+//     function(err, count) {
+//     if (err) return next(err);
+//
+//     res.render('main/products', {
+//         products: products,
+//         current: page,
+//         pages: Math.ceil(count / perPage)
+//     })
+// }
+//     )
+// })
+// }
+
+//     function (req, res) {
+//     // Use the Beer model to find all beer
+//     Beer.find(function (err, beers) {
+//         if (err)
+//             res.send(err);
+//
+//         let items = [];
+//         for (let i = 0; i < beers.length; i++) {
+//             let item = beers[i].toJSON();
+//             item._links = {
+//                 self: {
+//                     href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
+//                 }
+//             };
+//             items.push(item);
+//         }
+//         let collection = {
+//             items: items,
+//             _links: {
+//                 self: {
+//                     href: req.protocol + '://' + req.get('host') + req.originalUrl
+//                 }
+//             },
+//             pagination: 'hele dikke paginatie bla'
+//         };
+//         res.json(collection);
+//     });
+// };
 
 // Create endpoint /api/beers/:beer_id for GET
 exports.getBeer = function (req, res) {

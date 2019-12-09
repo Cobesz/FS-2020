@@ -8,9 +8,11 @@ const router = express.Router();
 // Create endpoint handlers for /beers
 router.route('/beers')
     .options(beerController.options)
-    .post(beerController.postBeers)
-    .get(beerController.getBeers);
+    .post(beerController.postBeers);
 
+router.route('/beers/:page')
+    .options(beerController.options)
+    .get(beerController.getBeers)
 
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')

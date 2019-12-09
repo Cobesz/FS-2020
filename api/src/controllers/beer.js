@@ -19,16 +19,10 @@ exports.postBeers = function (req, res) {
     // Create a new instance of the Beer model
     const beer = new Beer();
 
-
     // Set the beer properties that came from the POST data
-    beer.items[0] = {
-        name: req.body.name,
-        type: req.body.type,
-        quantity: req.body.quantity
-    };
-
-    beer.pagination = 'Dikke pagination bla';
-    beer._links.self.href = req.protocol + '://' + req.get('host') + req.originalUrl;
+    beer.name = req.body.name;
+    beer.type = req.body.type;
+    beer.quantity = req.body.quantity;
 
     // Save the beer and check for errors
     beer.save(function (err) {
@@ -47,10 +41,14 @@ exports.getBeers = function (req, res) {
         if (err)
             res.send(err);
 
-        let items= [];
-        for(let i = 0; i < beers.length; i++) {
+        let items = [];
+        for (let i = 0; i < beers.length; i++) {
             let item = beers[i].toJSON();
-            item._links = {};
+            item._links = {
+                self: {
+                    href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
+                }
+            };
             items.push(item);
         }
         let collection = {
@@ -61,7 +59,7 @@ exports.getBeers = function (req, res) {
                 }
             },
             pagination: 'hele dikke paginatie bla'
-        }
+        };
         res.json(collection);
     });
 };

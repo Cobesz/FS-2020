@@ -10,7 +10,7 @@ router.route('/beers')
     .options(beerController.options)
     .post(beerController.postBeers);
 
-router.route('/beers/:page')
+router.route('/beers/:start?/:limit?')
     .options(beerController.options)
     .get(beerController.getBeers)
 

@@ -37,8 +37,11 @@ exports.postBeers = function (req, res) {
 
 // Create endpoint /api/beers for GET
 exports.getBeers = function (req, res, next) {
-    const perPage = 2;
-    const page = req.params.page || 1;
+    const perPage = req.query.limit || 2;
+    const page = req.query.start || 1;
+    // const limit = req.params.limit || 0;
+
+    console.log(req.query);
 
     Beer.find({})
         .skip((perPage * page) - perPage)
@@ -70,7 +73,13 @@ exports.getBeers = function (req, res, next) {
                             currentPage: page,
                             currentItems: perPage,
                             totalPages: Math.ceil(count / perPage),
-                            totalItems: count
+                            totalItems: count,
+                            _links: {
+                                first: {
+                                    page: 1,
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
+                                },
+                            }
                         }
                     };
                     if (err) {

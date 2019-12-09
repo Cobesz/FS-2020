@@ -9,8 +9,7 @@ exports.options = function (req, res, next) {
     //intercepts OPTIONS method
     if ('OPTIONS' === req.method) {
         //respond with 200
-        res.send(200);
-        next();
+        return res.send(200);
     } else {
         //move on
         next();

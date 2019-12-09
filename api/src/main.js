@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import router from "./router";
 import cors from "cors";
-
+import paginate from "express-paginate";
 // Connect to the beerlocker MongoDB
 mongoose.connect('mongodb://localhost:27017/beerlocker');
 
@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(cors())
+app.use(cors());
+app.use(paginate.middleware(10, 50));
 // Register all our routes with /api
 app.use('/api', router);
 

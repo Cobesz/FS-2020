@@ -149,7 +149,7 @@ exports.deleteBeer = function (req, res) {
     Beer.remove({_id: req.params.beer_id}).then(beer => {
         console.log(beer)
         if (beer.deletedCount) {
-            res.send(200, 'Beer removed!');
+            res.send(204, 'Beer removed!');
         } else {
             res.send(404);
         }

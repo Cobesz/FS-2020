@@ -4,7 +4,7 @@ import Beer from "../models/beer";
 exports.optionsCollection = function (req, res, next) {
 
     if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded')) {
-        res.sendStatus(416);
+        return res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded');
@@ -17,10 +17,9 @@ exports.optionsCollection = function (req, res, next) {
 };
 
 exports.optionsDetail = function (req, res, next) {
-
-
+    
     if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded')) {
-        res.sendStatus(416);
+        return res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded');
@@ -63,57 +62,57 @@ exports.postBeers = function (req, res) {
 exports.getBeers = function (req, res, next) {
 
 
-        const perPage = req.query.limit || 0;
-        const page = req.query.start || 1;
+    const perPage = req.query.limit || 0;
+    const page = req.query.start || 1;
 
-        Beer.find({})
-            .skip((perPage * page) - perPage)
-            .limit(perPage)
-            .exec(function (err, beers) {
-                Beer.count().exec(
-                    function (err, count) {
-                        if (err)
-                            res.send(err);
+    Beer.find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function (err, beers) {
+            Beer.count().exec(
+                function (err, count) {
+                    if (err)
+                        res.send(err);
 
-                        let items = [];
-                        for (let i = 0; i < beers.length; i++) {
-                            let item = beers[i].toJSON();
-                            item._links = {
-                                self: {
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
-                                }
-                            };
-                            items.push(item);
-                        }
-                        let collection = {
-                            items: items,
-                            _links: {
-                                self: {
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl
-                                },
-                                collection: {
-                                    href: req.protocol + '://' + req.get('host') + "/api/beers"
-                                }
-                            },
-                            pagination: {
-                                currentPage: Number(page),
-                                currentItems: perPage,
-                                totalPages: Math.ceil(count / perPage),
-                                totalItems: count,
-                                _links: {
-                                    first: {
-                                        page: 1,
-                                        href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
-                                    },
-                                }
+                    let items = [];
+                    for (let i = 0; i < beers.length; i++) {
+                        let item = beers[i].toJSON();
+                        item._links = {
+                            self: {
+                                href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
                             }
                         };
-                        if (err) {
-                            return next(err)
-                        } else
-                            res.json(collection);
-                    });
-            });
+                        items.push(item);
+                    }
+                    let collection = {
+                        items: items,
+                        _links: {
+                            self: {
+                                href: req.protocol + '://' + req.get('host') + req.originalUrl
+                            },
+                            collection: {
+                                href: req.protocol + '://' + req.get('host') + "/api/beers"
+                            }
+                        },
+                        pagination: {
+                            currentPage: Number(page),
+                            currentItems: perPage,
+                            totalPages: Math.ceil(count / perPage),
+                            totalItems: count,
+                            _links: {
+                                first: {
+                                    page: 1,
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
+                                },
+                            }
+                        }
+                    };
+                    if (err) {
+                        return next(err)
+                    } else
+                        res.json(collection);
+                });
+        });
 
 };
 
@@ -121,12 +120,12 @@ exports.getBeers = function (req, res, next) {
 exports.getBeer = function (req, res) {
     // Use the Beer model to find a specific beer
 
-        Beer.find({_id: req.params.beer_id}, function (err, beer) {
-            if (err)
-                res.send(err);
+    Beer.find({_id: req.params.beer_id}, function (err, beer) {
+        if (err)
+            res.send(err);
 
-            res.json(beer);
-        });
+        res.json(beer);
+    });
 };
 
 // Create endpoint /api/beers/:beer_id for PUT

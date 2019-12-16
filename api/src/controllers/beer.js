@@ -3,9 +3,12 @@ import Beer from "../models/beer";
 
 exports.optionsCollection = function (req, res, next) {
 
-    if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
+    let conType = req.headers['content-type'];
+    console.log(conType)
+    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
         res.sendStatus(416);
     } else {
+
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -19,8 +22,10 @@ exports.optionsCollection = function (req, res, next) {
 exports.optionsDetail = function (req, res, next) {
 
 
-    if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
-        return res.sendStatus(406);
+    let conType = req.headers['content-type'];
+    console.log(conType)
+    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+        res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -62,10 +67,7 @@ exports.postBeers = function (req, res) {
 // Create endpoint /api/beers for GET
 exports.getBeers = function (req, res, next) {
 
-    let conType = req.headers['content-type'];
-    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
-        res.sendStatus(416);
-    } else {
+
         const perPage = req.query.limit || 0;
         const page = req.query.start || 1;
 
@@ -117,17 +119,12 @@ exports.getBeers = function (req, res, next) {
                             res.json(collection);
                     });
             });
-    }
+
 };
 
 // Create endpoint /api/beers/:beer_id for GET
 exports.getBeer = function (req, res) {
     // Use the Beer model to find a specific beer
-
-    let conType = req.headers['content-type'];
-    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
-        res.sendStatus(416);
-    } else {
 
         Beer.find({_id: req.params.beer_id}, function (err, beer) {
             if (err)
@@ -135,7 +132,6 @@ exports.getBeer = function (req, res) {
 
             res.json(beer);
         });
-    }
 };
 
 // Create endpoint /api/beers/:beer_id for PUT

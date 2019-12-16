@@ -9,14 +9,14 @@ const router = express.Router();
 router.route('/beers/:start?/:limit?')
     .get(beerController.getBeers)
     .post(beerController.postBeers)
-    .options(beerController.optionsCollection());
+    .options(beerController.optionsCollection);
 
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')
     .get(beerController.getBeer)
     .put(beerController.putBeer)
     .delete(beerController.deleteBeer)
-    .options(beerController.optionsDetail());
+    .options(beerController.optionsDetail);
 
 // // Create endpoint handlers for /users
 // router.route('/users')

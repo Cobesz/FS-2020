@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 
 // app.use(cors());
 
-app.use(paginate.middleware(10, 50));
+app.use(paginate.middleware(1, 50));
 // Register all our routes with /api
 app.use('/api', router);
 

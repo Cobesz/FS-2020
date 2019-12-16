@@ -1,22 +1,10 @@
 // Load required packages
 import Beer from "../models/beer";
 
-let headers = {};
-
-// headers['Access-Control-Allow-Origin'] = '*';
-// headers['Content-Type'] = 'Content-Type', 'application/json';
-// headers['Content-Type'] = 'Content-Type', 'application/x-www-form-urlencoded';
-// headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-// headers['Allow'] = 'GET, POST, OPTIONS';
-// headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-// headers['Content-Length'] = '0';
-// headers["Access-Control-Max-Age"] = '86400';
-
 exports.optionsCollection = function (req, res, next) {
 
     if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
-        // res.sendStatus(416);
-        return res.sendStatus(406);
+        res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -29,6 +17,7 @@ exports.optionsCollection = function (req, res, next) {
 };
 
 exports.optionsDetail = function (req, res, next) {
+
 
     if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
         return res.sendStatus(406);
@@ -72,68 +61,81 @@ exports.postBeers = function (req, res) {
 
 // Create endpoint /api/beers for GET
 exports.getBeers = function (req, res, next) {
-    const perPage = req.query.limit || 0;
-    const page = req.query.start || 1;
 
-    Beer.find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec(function (err, beers) {
-            Beer.count().exec(
-                function (err, count) {
-                    if (err)
-                        res.send(err);
+    let conType = req.headers['content-type'];
+    if (!conType || conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+        res.sendStatus(416);
+    } else {
+        const perPage = req.query.limit || 0;
+        const page = req.query.start || 1;
 
-                    let items = [];
-                    for (let i = 0; i < beers.length; i++) {
-                        let item = beers[i].toJSON();
-                        item._links = {
-                            self: {
-                                href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
+        Beer.find({})
+            .skip((perPage * page) - perPage)
+            .limit(perPage)
+            .exec(function (err, beers) {
+                Beer.count().exec(
+                    function (err, count) {
+                        if (err)
+                            res.send(err);
+
+                        let items = [];
+                        for (let i = 0; i < beers.length; i++) {
+                            let item = beers[i].toJSON();
+                            item._links = {
+                                self: {
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + '/' + item._id
+                                }
+                            };
+                            items.push(item);
+                        }
+                        let collection = {
+                            items: items,
+                            _links: {
+                                self: {
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl
+                                },
+                                collection: {
+                                    href: req.protocol + '://' + req.get('host') + "/api/beers"
+                                }
+                            },
+                            pagination: {
+                                currentPage: Number(page),
+                                currentItems: perPage,
+                                totalPages: Math.ceil(count / perPage),
+                                totalItems: count,
+                                _links: {
+                                    first: {
+                                        page: 1,
+                                        href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
+                                    },
+                                }
                             }
                         };
-                        items.push(item);
-                    }
-                    let collection = {
-                        items: items,
-                        _links: {
-                            self: {
-                                href: req.protocol + '://' + req.get('host') + req.originalUrl
-                            },
-                            collection: {
-                                href: req.protocol + '://' + req.get('host') + "/api/beers"
-                            }
-                        },
-                        pagination: {
-                            currentPage: Number(page),
-                            currentItems: perPage,
-                            totalPages: Math.ceil(count / perPage),
-                            totalItems: count,
-                            _links: {
-                                first: {
-                                    page: 1,
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
-                                },
-                            }
-                        }
-                    };
-                    if (err) {
-                        return next(err)
-                    } else
-                        res.json(collection);
-                });
-        });
+                        if (err) {
+                            return next(err)
+                        } else
+                            res.json(collection);
+                    });
+            });
+    }
 };
 
 // Create endpoint /api/beers/:beer_id for GET
 exports.getBeer = function (req, res) {
     // Use the Beer model to find a specific beer
-    Beer.find({_id: req.params.beer_id}, function (err, beer) {
-        if (err)
-            res.send(err);
 
-        res.json(beer);
-    });
+    let conType = req.headers['content-type'];
+    if (!conType || conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+        res.sendStatus(416);
+    } else {
+
+        Beer.find({_id: req.params.beer_id}, function (err, beer) {
+            if (err)
+                res.send(err);
+
+            res.json(beer);
+        });
+    }
 };
 
 // Create endpoint /api/beers/:beer_id for PUT

@@ -54,7 +54,7 @@ exports.postBeers = function (req, res) {
             if (err) {
                 res.send(err);
             } else {
-                res.send(beer);
+                res.send(201, beer);
             }
         });
     }

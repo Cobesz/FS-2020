@@ -137,12 +137,21 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
     // Use the Beer model to find a specific beer
-    Beer.update({_id: req.params.beer_id}, {quantity: req.body.quantity}, function (err, num, raw) {
-        if (err)
-            res.send(err);
-
-        res.json({message: num + ' updated'});
-    });
+    Beer.findOneAndUpdate({_id: req.params.beer_id}, {
+        $set: {
+            title: req.body.title,
+            type: req.body.type,
+            quantity: req.body.quantity
+        }
+    }, {new: true}).then((beer) => {
+        if (beer) {
+            res.send(200, beer)
+        } else {
+            console.error('biertje bestaat niet')
+        }
+    }).catch((err) => {
+        console.error(err);
+    })
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

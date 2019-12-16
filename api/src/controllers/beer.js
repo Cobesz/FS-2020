@@ -25,22 +25,29 @@ exports.options = function (req, res, next) {
 // Create endpoint /api/beers for POST
 exports.postBeers = function (req, res) {
 
-    // Create a new instance of the Beer model
-    const beer = new Beer();
+    console.log(req.body);
 
-    // Set the beer properties that came from the POST data
-    beer.name = req.body.name;
-    beer.type = req.body.type;
-    beer.quantity = req.body.quantity;
+    if (!req.body.name || !req.body.type || !req.body.quantity) {
+        res.send(403);
+    } else {
 
-    // Save the beer and check for errors
-    beer.save(function (err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(beer);
-        }
-    });
+        // Create a new instance of the Beer model
+        const beer = new Beer();
+
+        // Set the beer properties that came from the POST data
+        beer.name = req.body.name;
+        beer.type = req.body.type;
+        beer.quantity = req.body.quantity;
+
+        // Save the beer and check for errors
+        beer.save(function (err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(beer);
+            }
+        });
+    }
 };
 
 // Create endpoint /api/beers for GET

@@ -11,7 +11,6 @@ router.route('/beers/:start?/:limit?')
     .get(beerController.getBeers)
     .post(beerController.postBeers);
 
-
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')
     .options(beerController.optionsDetail)

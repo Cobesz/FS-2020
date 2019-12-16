@@ -12,7 +12,22 @@ headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
 headers['Content-Length'] = '0';
 headers["Access-Control-Max-Age"] = '86400';
 
-exports.options = function (req, res, next) {
+exports.optionsCollection = function (req, res, next) {
+
+    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
+        res.sendStatus(416);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, DELETE, OPTIONS');
+        res.setHeader('Allow', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Content-Type', 'Application/json,  Application/x-www-form-urlencoded');
+        res.setHeader('Access-Control-Allow-Accept', 'Application/json,  x-www-form-urlencoded');
+        return res.sendStatus(200);
+    }
+};
+
+exports.optionsDetail = function (req, res, next) {
 
     if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
         res.sendStatus(416);
@@ -25,12 +40,6 @@ exports.options = function (req, res, next) {
         res.setHeader('Access-Control-Allow-Accept', 'Application/json,  x-www-form-urlencoded');
         return res.sendStatus(200);
     }
-    // try {
-    //     res.setHeader('Allow', "GET, POST, OPTIONS")
-    //     res.status(200).send()
-    // } catch (err) {
-    //     res.status(405).json({message: err})
-    // }
 };
 
 // Create endpoint /api/beers for POST

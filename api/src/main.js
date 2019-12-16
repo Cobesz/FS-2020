@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(cors());
+
 app.use(paginate.middleware(10, 50));
 // Register all our routes with /api
 app.use('/api', router);

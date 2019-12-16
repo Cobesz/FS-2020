@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 // Define our beer schema
 const BeerSchema = new mongoose.Schema({
-    name: String,
+    title: String,
     type: String,
     quantity: Number,
 });

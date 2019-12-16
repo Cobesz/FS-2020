@@ -35,10 +35,9 @@ exports.options = function (req, res, next) {
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function (req, res) {
+    
 
-    console.log(req.body);
-
-    if (!req.body.name || !req.body.type || !req.body.quantity) {
+    if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
     } else {
 

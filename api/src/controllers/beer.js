@@ -62,9 +62,13 @@ exports.postBeers = function (req, res) {
 exports.getBeers = function (req, res, next) {
 
 
-    const perPage = req.query.limit || 0;
-    const page = req.query.start || 1;
+    let perPage = req.query.limit;
+    let page = req.query.start;
 
+    if (req.query.start === '' || req.query.limit === '') {
+        perPage = 10;
+        page = 0;
+    }
     Beer.find({})
         .skip((perPage * page) - perPage)
         .limit(perPage)

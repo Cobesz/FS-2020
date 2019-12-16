@@ -63,7 +63,7 @@ exports.postBeers = function (req, res) {
 exports.getBeers = function (req, res, next) {
 
     let conType = req.headers['content-type'];
-    if (!conType || conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
         res.sendStatus(416);
     } else {
         const perPage = req.query.limit || 0;
@@ -125,7 +125,7 @@ exports.getBeer = function (req, res) {
     // Use the Beer model to find a specific beer
 
     let conType = req.headers['content-type'];
-    if (!conType || conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
         res.sendStatus(416);
     } else {
 

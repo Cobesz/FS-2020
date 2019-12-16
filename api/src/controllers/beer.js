@@ -35,7 +35,7 @@ exports.options = function (req, res, next) {
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function (req, res) {
-    
+
 
     if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
@@ -45,7 +45,7 @@ exports.postBeers = function (req, res) {
         const beer = new Beer();
 
         // Set the beer properties that came from the POST data
-        beer.name = req.body.name;
+        beer.title = req.body.title;
         beer.type = req.body.type;
         beer.quantity = req.body.quantity;
 

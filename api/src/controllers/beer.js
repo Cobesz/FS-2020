@@ -5,6 +5,7 @@ let headers = {};
 
 headers['Access-Control-Allow-Origin'] = '*';
 headers['Content-Type'] = 'Content-Type', 'application/json';
+headers['Content-Type'] = 'Content-Type', 'application/x-www-form-urlencoded';
 headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 headers['Allow'] = 'GET, POST, OPTIONS';
 headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
@@ -55,7 +56,7 @@ exports.getBeers = function (req, res, next) {
     const perPage = req.query.limit || 0;
     const page = req.query.start || 1;
 
-    console.log(req.query)
+    console.log(req.query);
 
     Beer.find({})
         .skip((perPage * page) - perPage)
@@ -84,7 +85,7 @@ exports.getBeers = function (req, res, next) {
                             }
                         },
                         pagination: {
-                            currentPage: page,
+                            currentPage: Number(page),
                             currentItems: perPage,
                             totalPages: Math.ceil(count / perPage),
                             totalItems: count,

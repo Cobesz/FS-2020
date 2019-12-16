@@ -16,7 +16,7 @@ exports.optionsCollection = function (req, res, next) {
 
     if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
         // res.sendStatus(416);
-        res.status(405).json({ message: 'Mag nie' });
+        res.status(406).json({ message: 'Mag nie' });
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -31,7 +31,7 @@ exports.optionsCollection = function (req, res, next) {
 exports.optionsDetail = function (req, res, next) {
 
     if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
-        res.status(405).json({ message: 'Mag nie' });
+        res.status(406).json({ message: 'Mag nie' });
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');

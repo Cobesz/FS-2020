@@ -3,12 +3,9 @@ import Beer from "../models/beer";
 
 exports.optionsCollection = function (req, res, next) {
 
-    let conType = req.headers['content-type'];
-    console.log(conType)
-    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
+    if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
         res.sendStatus(416);
     } else {
-
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -22,10 +19,8 @@ exports.optionsCollection = function (req, res, next) {
 exports.optionsDetail = function (req, res, next) {
 
 
-    let conType = req.headers['content-type'];
-    console.log(conType)
-    if (conType !== 'application/x-www-form-urlencoded' && conType !== 'application/json') {
-        res.sendStatus(416);
+    if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
+        return res.sendStatus(406);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');

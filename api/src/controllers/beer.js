@@ -3,7 +3,7 @@ import Beer from "../models/beer";
 
 exports.optionsCollection = function (req, res, next) {
 
-    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
+    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded')) {
         res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,7 +19,7 @@ exports.optionsCollection = function (req, res, next) {
 exports.optionsDetail = function (req, res, next) {
 
 
-    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
+    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded')) {
         res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');

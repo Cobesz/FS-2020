@@ -20,7 +20,7 @@ exports.optionsDetail = function (req, res, next) {
 
 
     if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
-        return res.sendStatus(406);
+        res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');

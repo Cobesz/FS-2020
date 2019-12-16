@@ -1,23 +1,26 @@
 // Load required packages
 import Beer from "../models/beer";
 
+let headers = {};
+
+headers['Access-Control-Allow-Origin'] = '*';
+headers['Content-Type'] = 'Content-Type', 'application/json';
+headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+headers['Allow'] = 'GET, POST, OPTIONS';
+headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+headers['Content-Length'] = '0';
+headers["Access-Control-Max-Age"] = '86400';
 
 exports.options = function (req, res, next) {
-
-    res.header['Access-Control-Allow-Origin'] = '*';
-    res.header['Content-Type'] = 'Content-Type', 'application/json';
-    res.header['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-    res.header['Allow'] = 'GET, POST, OPTIONS';
-    res.header['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    res.header['Content-Length'] = '0';
-    res.header["Access-Control-Max-Age"] = '86400';
 
     // res.header('Access-Control-Allow-Origin', '*');
     // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
     if (req.method === 'OPTIONS') {
-        res.send(200);
+        res.writeHead(200, headers);
+
+        res.send();
     } else {
         res.send(403);
     }

@@ -125,10 +125,12 @@ exports.getBeer = function (req, res) {
     // Use the Beer model to find a specific beer
 
     Beer.find({_id: req.params.beer_id}, function (err, beer) {
-        if (err)
-            res.send(err);
 
-        res.json(beer);
+        if (beer[0]) {
+            res.send(200, beer);
+        } else {
+            res.send(404)
+        }
     });
 };
 

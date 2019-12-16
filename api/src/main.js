@@ -6,7 +6,12 @@ import router from "./router";
 import cors from "cors";
 import paginate from "express-paginate";
 // Connect to the beerlocker MongoDB
-mongoose.connect('mongodb://localhost:27017/beerlocker');
+mongoose.connect('mongodb://localhost:27017/beerlocker',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
 
 const port = 8000;
 

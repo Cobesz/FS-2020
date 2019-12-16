@@ -3,9 +3,18 @@ import Beer from "../models/beer";
 
 
 exports.options = function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    res.header['Access-Control-Allow-Origin'] = '*';
+    res.header['Content-Type'] = 'Content-Type', 'application/json';
+    res.header['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+    res.header['Allow'] = 'GET, POST, OPTIONS';
+    res.header['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    res.header['Content-Length'] = '0';
+    res.header["Access-Control-Max-Age"] = '86400';
+
+    // res.header('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
     if (req.method === 'OPTIONS') {
         res.send(200);

@@ -21,7 +21,7 @@ exports.options = function (req, res, next) {
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
         res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, DELETE, OPTIONS');
         res.setHeader('Allow', 'GET, PUT, DELETE, OPTIONS');
-        res.setHeader('Access-Control-Allow-Content-Type', 'Application/json,  x-www-form-urlencoded');
+        res.setHeader('Access-Control-Allow-Content-Type', 'Application/json,  Application/x-www-form-urlencoded');
         res.setHeader('Access-Control-Allow-Accept', 'Application/json,  x-www-form-urlencoded');
         return res.sendStatus(200);
     }

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const BeerSchema = new mongoose.Schema({
     title: String,
     type: String,
-    quantity: Number,
+    quantity: String,
 });
 
 // Export the Mongoose model

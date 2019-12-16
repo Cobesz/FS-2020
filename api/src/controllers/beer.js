@@ -14,13 +14,20 @@ headers["Access-Control-Max-Age"] = '86400';
 
 exports.options = function (req, res, next) {
 
-    if (req.method === 'OPTIONS') {
-        res.writeHead(200, headers);
-
-        res.send();
-    } else {
-        res.send(403);
+    try {res.setHeader('Allow', "GET, POST, OPTIONS")
+        res.status(200).send()
+    } catch (err) {
+        res.status(405).json({ message: err })
     }
+
+    // if (req.method === 'OPTIONS') {
+    //     res.writeHead(200, headers);
+    //
+    //     res.send();
+    // } else {
+    //     res.send(403);
+    // }
+
 };
 
 // Create endpoint /api/beers for POST

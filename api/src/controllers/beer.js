@@ -37,7 +37,7 @@ exports.postBeers = function (req, res) {
 
 
     if (!req.body.title || !req.body.type || !req.body.quantity) {
-        res.send(403);
+        res.status.send(403);
     } else {
 
         // Create a new instance of the Beer model
@@ -51,9 +51,9 @@ exports.postBeers = function (req, res) {
         // Save the beer and check for errors
         beer.save(function (err) {
             if (err) {
-                res.send(err);
+                res.status.send(err);
             } else {
-                res.send(201, beer);
+                res.status.send(201, beer);
             }
         });
     }

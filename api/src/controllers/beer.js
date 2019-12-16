@@ -14,20 +14,22 @@ headers["Access-Control-Max-Age"] = '86400';
 
 exports.options = function (req, res, next) {
 
-    try {res.setHeader('Allow', "GET, POST, OPTIONS")
-        res.status(200).send()
-    } catch (err) {
-        res.status(405).json({ message: err })
+    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')) {
+        res.sendStatus(416);
     }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Content-Type', 'Application/json,  x-www-form-urlencoded');
+    res.header('Access-Control-Allow-Accept', 'Application/json,  x-www-form-urlencoded');
+    return res.sendStatus(200);
 
-    // if (req.method === 'OPTIONS') {
-    //     res.writeHead(200, headers);
-    //
-    //     res.send();
-    // } else {
-    //     res.send(403);
+    // try {
+    //     res.setHeader('Allow', "GET, POST, OPTIONS")
+    //     res.status(200).send()
+    // } catch (err) {
+    //     res.status(405).json({message: err})
     // }
-
 };
 
 // Create endpoint /api/beers for POST
@@ -62,8 +64,6 @@ exports.postBeers = function (req, res) {
 exports.getBeers = function (req, res, next) {
     const perPage = req.query.limit || 0;
     const page = req.query.start || 1;
-
-    console.log(req.query);
 
     Beer.find({})
         .skip((perPage * page) - perPage)

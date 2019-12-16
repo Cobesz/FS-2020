@@ -13,6 +13,9 @@ const port = 8000;
 // Create our Express application
 const app = express();
 
+
+
+
 // Zorgt ervoor dat CORS en de bijhorende allows in orde zijn
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://145.24.222.116:8000/api/beers');

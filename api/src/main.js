@@ -20,6 +20,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 // app.use(cors());
+app.use(function (req, res, next) {
+    if (req.accepts(['application/json', 'application/x-www-form-urlencoded'])) {
+        next()
+    } else {
+        res.status(406).send({
+            error: "We only accept application/json & application/x-www-form-urlencoded."
+        })
+    }
+})
 
 app.use(paginate.middleware(10, 50));
 // Register all our routes with /api

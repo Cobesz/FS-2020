@@ -89,6 +89,9 @@ exports.getBeers = function (req, res, next) {
                         _links: {
                             self: {
                                 href: req.protocol + '://' + req.get('host') + req.originalUrl
+                            },
+                            collection: {
+                                href: req.protocol + '://' + req.get('host') + "/api/beers"
                             }
                         },
                         pagination: {

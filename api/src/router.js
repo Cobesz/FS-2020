@@ -7,16 +7,16 @@ const router = express.Router();
 
 // Create endpoint handlers for /beers
 router.route('/beers/:start?/:limit?')
-    .options(beerController.optionsCollection)
     .get(beerController.getBeers)
-    .post(beerController.postBeers);
+    .post(beerController.postBeers)
+    .options(beerController.optionsCollection);
 
 // Create endpoint handlers for /beers/:beer_id
 router.route('/beers/:beer_id')
-    .options(beerController.optionsDetail)
     .get(beerController.getBeer)
     .put(beerController.putBeer)
-    .delete(beerController.deleteBeer);
+    .delete(beerController.deleteBeer)
+    .options(beerController.optionsDetail);
 
 // // Create endpoint handlers for /users
 // router.route('/users')

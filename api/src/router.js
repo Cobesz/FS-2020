@@ -18,9 +18,9 @@ router.route('/beers/:beer_id')
     .put(beerController.putBeer)
     .delete(beerController.deleteBeer);
 
-// Create endpoint handlers for /users
-router.route('/users')
-    .post(userController.postUsers)
-    .get(authController.isAuthenticated, userController.getUsers);
+// // Create endpoint handlers for /users
+// router.route('/users')
+//     .post(userController.postUsers)
+//     .get(authController.isAuthenticated, userController.getUsers);
 
 module.exports = router;

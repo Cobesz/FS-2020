@@ -3,14 +3,14 @@ import Beer from "../models/beer";
 
 let headers = {};
 
-headers['Access-Control-Allow-Origin'] = '*';
-headers['Content-Type'] = 'Content-Type', 'application/json';
-headers['Content-Type'] = 'Content-Type', 'application/x-www-form-urlencoded';
-headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-headers['Allow'] = 'GET, POST, OPTIONS';
-headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-headers['Content-Length'] = '0';
-headers["Access-Control-Max-Age"] = '86400';
+// headers['Access-Control-Allow-Origin'] = '*';
+// headers['Content-Type'] = 'Content-Type', 'application/json';
+// headers['Content-Type'] = 'Content-Type', 'application/x-www-form-urlencoded';
+// headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+// headers['Allow'] = 'GET, POST, OPTIONS';
+// headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+// headers['Content-Length'] = '0';
+// headers["Access-Control-Max-Age"] = '86400';
 
 exports.optionsCollection = function (req, res, next) {
 
@@ -19,7 +19,7 @@ exports.optionsCollection = function (req, res, next) {
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
         res.setHeader('Allow', 'GET, POST, OPTIONS');
         res.setHeader('Access-Control-Allow-Content-Type', 'Application/json,  Application/x-www-form-urlencoded');
         res.setHeader('Access-Control-Allow-Accept', 'Application/json,  x-www-form-urlencoded');

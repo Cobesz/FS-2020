@@ -146,10 +146,12 @@ exports.putBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for DELETE
 exports.deleteBeer = function (req, res) {
     // Use the Beer model to find a specific beer and remove it
-    Beer.remove({_id: req.params.beer_id}, function (err) {
-        if (err)
-            res.send(err);
-
-        res.json({message: 'Beer removed from the locker!'});
+    Beer.remove({_id: req.params.beer_id}).then(beer => {
+        console.log(beer)
+        if (beer.deletedCount) {
+            res.send(200, 'Beer removed!');
+        } else {
+            res.send(404);
+        }
     });
 };

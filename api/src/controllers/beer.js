@@ -18,7 +18,7 @@ exports.optionsCollection = function (req, res, next) {
 
 exports.optionsDetail = function (req, res, next) {
 
-    if (!res.header('Access-Control-Allow-Headers', 'Application/json,  x-www-form-urlencoded')) {
+    if (!res.header('Access-Control-Allow-Headers', 'Content-Type, Accept , Content-Type, Application/json, Content-Type, Application/x-www-form-urlencoded')) {
         res.sendStatus(416);
     } else {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -136,6 +136,11 @@ exports.getBeer = function (req, res) {
 
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
+
+    if (req.body.title !== '' ) {
+
+    }
+
     // Use the Beer model to find a specific beer
     Beer.findOneAndUpdate({_id: req.params.beer_id}, {
         $set: {

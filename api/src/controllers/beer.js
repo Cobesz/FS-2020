@@ -106,8 +106,20 @@ exports.getBeers = function (req, res, next) {
                             _links: {
                                 first: {
                                     page: 1,
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + "?start=" + page + "&limit=" + perPage
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl
                                 },
+                                last: {
+                                    page: Math.ceil(count / perPage),
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + page
+                                },
+                                previous: {
+                                    page: Math.ceil(count / perPage) - 1 || 1,
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + page
+                                },
+                                next: {
+                                    page: Number(page) + 1 || Math.ceil(count / perPage),
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + Number(page) 
+                                }
                             }
                         }
                     };

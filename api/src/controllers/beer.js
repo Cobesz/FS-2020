@@ -116,12 +116,12 @@ exports.getBeers = function (req, res, next) {
                                     href: urlSelf + '?start='+ Math.ceil(count / perPage) + '&limit=' + perPage
                                 },
                                 previous: {
-                                    page: Math.ceil(count / perPage) - 1 || 1,
-                                    href: urlSelf + '?start=1&limit=' + perPage
+                                    page: Number(page) - 1 || 1,
+                                    href: urlSelf + '?start=' + (Number(page) - 1 || 1) + '&limit=' + perPage
                                 },
                                 next: {
                                     page: Number(page) + 1 || Math.ceil(count / perPage),
-                                    href: urlSelf + '?start=1&limit=' + perPage
+                                    href: urlSelf + '?start=' + (Number(page) + 1) + '&limit=' + perPage
                                 }
                             }
                         }

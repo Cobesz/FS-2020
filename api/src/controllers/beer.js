@@ -65,6 +65,9 @@ exports.getBeers = function (req, res, next) {
     let perPage = req.query.limit;
     let page = req.query.start;
 
+    const urlSelf = req.protocol + '://' + req.get('host') + '/api/beers';
+    console.log(urlSelf);
+
     if (req.query.start === '' || req.query.limit === '') {
         perPage = 10;
         page = 0;
@@ -106,19 +109,19 @@ exports.getBeers = function (req, res, next) {
                             _links: {
                                 first: {
                                     page: 1,
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl
+                                    href: urlSelf + '?start=1&limit=' + perPage
                                 },
                                 last: {
                                     page: Math.ceil(count / perPage),
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + page
+                                    href: urlSelf + '?start='+ Math.ceil(count / perPage) + '&limit=' + perPage
                                 },
                                 previous: {
                                     page: Math.ceil(count / perPage) - 1 || 1,
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + page
+                                    href: urlSelf + '?start=1&limit=' + perPage
                                 },
                                 next: {
                                     page: Number(page) + 1 || Math.ceil(count / perPage),
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + Number(page)
+                                    href: urlSelf + '?start=1&limit=' + perPage
                                 }
                             }
                         }

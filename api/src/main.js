@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
             error: "We only accept application/json & application/x-www-form-urlencoded."
         })
     }
-})
+});
 
 app.use(paginate.middleware(10, 50));
 // Register all our routes with /api

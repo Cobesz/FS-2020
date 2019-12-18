@@ -149,10 +149,6 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
 
-    if (req.body.title !== '' ) {
-
-    }
-
     // Use the Beer model to find a specific beer
     Beer.findOneAndUpdate({_id: req.params.beer_id}, {
         $set: {
@@ -162,7 +158,20 @@ exports.putBeer = function (req, res) {
         }
     }, {new: true}).then((beer) => {
         if (beer) {
-            res.send(200, beer)
+
+            const detail = {
+                item: beer,
+                _links: {
+                    self: {
+                        href: req.protocol + '://' + req.get('host') + req.originalUrl
+                    },
+                    collection: {
+                        href: req.protocol + '://' + req.get('host') + "/api/beers"
+                    }
+                }
+            };
+
+            res.send(200, detail)
         } else {
             console.error('biertje bestaat niet')
         }

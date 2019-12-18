@@ -118,7 +118,7 @@ exports.getBeers = function (req, res, next) {
                                 },
                                 next: {
                                     page: Number(page) + 1 || Math.ceil(count / perPage),
-                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + Number(page) 
+                                    href: req.protocol + '://' + req.get('host') + req.originalUrl + Number(page)
                                 }
                             }
                         }

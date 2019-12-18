@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// app.use(cors());
+app.use(cors());
 app.use(function (req, res, next) {
     if (req.accepts(['application/json', 'application/x-www-form-urlencoded'])) {
         next()

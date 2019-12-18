@@ -127,8 +127,19 @@ exports.getBeer = function (req, res) {
     Beer.find({_id: req.params.beer_id}, function (err, beer) {
 
         if (beer[0]) {
-            console.log(beer)
-            res.send(200, beer[0]);
+            const detail = {
+                item: beer[0],
+                _links: {
+                    self: {
+                        href: req.protocol + '://' + req.get('host') + req.originalUrl
+                    },
+                    collection: {
+                        href: req.protocol + '://' + req.get('host') + "/api/beers"
+                    }
+                }
+            };
+
+            res.send(200, detail);
         } else {
             res.send(404)
         }

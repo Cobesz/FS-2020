@@ -100,7 +100,7 @@ exports.getBeers = function (req, res, next) {
                         },
                         pagination: {
                             currentPage: Number(page),
-                            currentItems: perPage,
+                            currentItems: items.length,
                             totalPages: Math.ceil(count / perPage),
                             totalItems: count,
                             _links: {

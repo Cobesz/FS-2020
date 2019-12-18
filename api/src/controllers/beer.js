@@ -127,7 +127,8 @@ exports.getBeer = function (req, res) {
     Beer.find({_id: req.params.beer_id}, function (err, beer) {
 
         if (beer[0]) {
-            res.send(200, beer);
+            console.log(beer)
+            res.send(200, beer[0]);
         } else {
             res.send(404)
         }

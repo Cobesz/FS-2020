@@ -184,7 +184,7 @@ exports.putBeer = function (req, res) {
             type: req.body.type,
             quantity: req.body.quantity
         }
-    }, {new: true}).then((beer) => {
+    }, {new: false}).then((beer) => {
         if (beer) {
 
             const detail = {

@@ -169,13 +169,13 @@ exports.putBeer = function (req, res) {
         title: req.body.title,
         type: req.body.type,
         quantity: req.body.quantity,
-    }
+    };
 
 
     console.log(beer);
-    if (!beer.title || !beer.type || !beer.quantity ) {
-        return res.sendStatus(403);
-    }
+    // if (!beer.title || !beer.type || !beer.quantity ) {
+    //     return res.sendStatus(403);
+    // }
 
     // Use the Beer model to find a specific beer
     Beer.findOneAndUpdate({_id: req.params.beer_id}, {

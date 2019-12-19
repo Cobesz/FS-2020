@@ -172,7 +172,7 @@ exports.putBeer = function (req, res) {
     };
 
 
-    console.log(beer);
+    // console.log(beer);
     // if (!beer.title || !beer.type || !beer.quantity ) {
     //     return res.sendStatus(403);
     // }
@@ -199,7 +199,9 @@ exports.putBeer = function (req, res) {
                 }
             };
 
-            res.send(200, detail)
+            console.log(beer)
+
+            res.send(200, beer)
         } else {
             console.error('biertje bestaat niet')
         }

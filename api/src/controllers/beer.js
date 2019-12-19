@@ -166,25 +166,27 @@ exports.getBeer = function (req, res) {
 exports.putBeer = function (req, res) {
 
 
-    if (!req.body.title || !req.body.type || !req.body.quantity) {
-        res.send(403);
-    } else {
+
 
         Beer.findById({_id: req.params.beer_id}).then(beer => {
 
-            beer.title = req.body.title;
-            beer.type = req.body.type;
-            beer.quantity = req.body.quantity;
+            if (!req.body.title || !req.body.type || !req.body.quantity) {
+                res.send(403);
+            } else {
 
-            // Save the beer and check for errors
-            beer.save(function (err) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.json(beer);
-                }
-            });
+                beer.title = req.body.title;
+                beer.type = req.body.type;
+                beer.quantity = req.body.quantity;
 
+                // Save the beer and check for errors
+                beer.save(function (err) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(beer);
+                    }
+                });
+            }
         }).catch(err => res.send(err))
 
 
@@ -219,7 +221,6 @@ exports.putBeer = function (req, res) {
         // }).catch((err) => {
         //     console.error(err);
         // })
-    }
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

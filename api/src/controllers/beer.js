@@ -165,36 +165,62 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
 
+    Beer.find({_id: req.params.beer_id}, function (err, foundBeer) {
 
-    // Use the Beer model to find a specific beer
-    Beer.findOneAndUpdate({_id: req.params.beer_id}, {
-        $set: {
-            title: req.body.title,
-            type: req.body.type,
-            quantity: req.body.quantity
-        }
-    }, {new: false}).then((beer) => {
-        if (beer) {
+        console.log(foundBeer[0]);
+        if (foundBeer[0]) {
 
-            const detail = {
-                item: beer,
-                _links: {
-                    self: {
-                        href: req.protocol + '://' + req.get('host') + req.originalUrl
-                    },
-                    collection: {
-                        href: req.protocol + '://' + req.get('host') + "/api/beers"
+
+            const beer = foundBeer[0];
+            beer.title = req.body.title;
+            beer.type = req.body.type;
+            beer.quantity = req.body.quantity;
+            if (!beer.title || !beer.type || !beer.quantity) {
+                return res.sendStatus(403);
+            } else {
+                beer.save((err) => {
+                    if (err) {
+                        return res.send(err);
                     }
-                }
-            };
-
-            res.json(200, detail)
+                    return res.json(beer);
+                });
+            }
         } else {
-            console.error('biertje bestaat niet')
+            res.send(404)
         }
-    }).catch((err) => {
-        console.error(err);
     })
+
+    //
+    //
+    // // Use the Beer model to find a specific beer
+    // Beer.findOneAndUpdate({_id: req.params.beer_id}, {
+    //     $set: {
+    //         title: req.body.title,
+    //         type: req.body.type,
+    //         quantity: req.body.quantity
+    //     }
+    // }, {new: false}).then((beer) => {
+    //     if (beer) {
+    //
+    //         const detail = {
+    //             item: beer,
+    //             _links: {
+    //                 self: {
+    //                     href: req.protocol + '://' + req.get('host') + req.originalUrl
+    //                 },
+    //                 collection: {
+    //                     href: req.protocol + '://' + req.get('host') + "/api/beers"
+    //                 }
+    //             }
+    //         };
+    //
+    //         res.json(200, detail)
+    //     } else {
+    //         console.error('biertje bestaat niet')
+    //     }
+    // }).catch((err) => {
+    //     console.error(err);
+    // })
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

@@ -171,41 +171,41 @@ exports.putBeer = function (req, res) {
         quantity: req.body.quantity,
     }
 
+
     console.log(beer);
-    if (!beer.title || !beer.type || !beer.quantity) {
+    if (!beer.title || !beer.type || !beer.quantity ) {
         return res.sendStatus(403);
-    } else {
-
-        // Use the Beer model to find a specific beer
-        Beer.findOneAndUpdate({_id: req.params.beer_id}, {
-            $set: {
-                title: req.body.title,
-                type: req.body.type,
-                quantity: req.body.quantity
-            }
-        }, {new: true}).then((beer) => {
-            if (beer) {
-
-                const detail = {
-                    item: beer,
-                    _links: {
-                        self: {
-                            href: req.protocol + '://' + req.get('host') + req.originalUrl
-                        },
-                        collection: {
-                            href: req.protocol + '://' + req.get('host') + "/api/beers"
-                        }
-                    }
-                };
-
-                res.send(200, detail)
-            } else {
-                console.error('biertje bestaat niet')
-            }
-        }).catch((err) => {
-            console.error(err);
-        })
     }
+
+    // Use the Beer model to find a specific beer
+    Beer.findOneAndUpdate({_id: req.params.beer_id}, {
+        $set: {
+            title: req.body.title,
+            type: req.body.type,
+            quantity: req.body.quantity
+        }
+    }, {new: true}).then((beer) => {
+        if (beer) {
+
+            const detail = {
+                item: beer,
+                _links: {
+                    self: {
+                        href: req.protocol + '://' + req.get('host') + req.originalUrl
+                    },
+                    collection: {
+                        href: req.protocol + '://' + req.get('host') + "/api/beers"
+                    }
+                }
+            };
+
+            res.send(200, detail)
+        } else {
+            console.error('biertje bestaat niet')
+        }
+    }).catch((err) => {
+        console.error(err);
+    })
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

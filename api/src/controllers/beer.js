@@ -199,9 +199,9 @@ exports.putBeer = function (req, res) {
                 }
             };
 
-            console.log(beer)
+            console.log(detail);
 
-            res.send(200, beer)
+            res.json(beer)
         } else {
             console.error('biertje bestaat niet')
         }

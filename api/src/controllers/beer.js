@@ -165,25 +165,22 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
 
-Beer.findByIdAndUpdate(
-        // the id of the item to find
-        req.params.beer_id,
+    Beer.findById({_id: req.params.beer_id}).then(beer => {
 
-        // the change to be made. Mongoose will smartly combine your existing
-        // document with this change, which allows for partial updates too
-        req.body,
+        beer.title = req.body.title;
+        beer.type = req.body.type;
+        beer.quantity = req.body.quantity;
 
-        // an option that asks mongoose to return the updated version
-        // of the document instead of the pre-updated one.
-        {new: true},
+        // Save the beer and check for errors
+        beer.save(function (err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(beer);
+            }
+        });
 
-        // the callback function
-        (err, beer) => {
-            // Handle any possible database errors
-            if (err) return res.status(500).send(err);
-            return res.send(beer);
-        }
-    )
+    }).catch(err => res.send(err))
 
 
     //

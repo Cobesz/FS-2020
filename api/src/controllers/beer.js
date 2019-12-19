@@ -188,9 +188,7 @@ exports.putBeer = function (req, res) {
                 }
             };
 
-            // console.log(detail);
-
-            res.json(200, beer)
+            res.json(200, detail)
         } else {
             console.error('biertje bestaat niet')
         }

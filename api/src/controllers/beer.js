@@ -168,17 +168,17 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = async function (req, res) {
 
-
-    const beer = await Beer.findById(req.params.beer_id);
-
-    if (!beer) {
-        console.error('biertje bestaat niet');
-        return;
-    }
-
     if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
     } else {
+        
+        const beer = await Beer.findById(req.params.beer_id);
+
+        if (!beer) {
+            console.error('biertje bestaat niet');
+            return;
+        }
+
 
         beer.title = req.body.title || beer.title;
         beer.quantity = req.body.quantity || beer.quantity;

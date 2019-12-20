@@ -35,7 +35,6 @@ exports.optionsDetail = function (req, res, next) {
 exports.postBeers = function (req, res) {
 
 
-
     if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
     } else {
@@ -169,23 +168,26 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = async function (req, res) {
 
-    console.log("PUT body: " + JSON.stringify(req.body));
 
     const beer = await Beer.findById(req.params.beer_id);
-    console.log("PUT current: " + beer);
 
-    if(!beer) {
-        console.error('biertje bestaat niet')
+    if (!beer) {
+        console.error('biertje bestaat niet');
         return;
     }
 
-    beer.title = req.body.title || beer.title;
-    beer.quantity = req.body.quantity || beer.quantity;
-    beer.type = req.body.type || beer.type;
+    if (!req.body.title || !req.body.type || !req.body.quantity) {
+        res.send(403);
+    } else {
 
-    await beer.save();
-    console.log("PUT new: " + beer);
-    return res.json(200, beer);
+        beer.title = req.body.title || beer.title;
+        beer.quantity = req.body.quantity || beer.quantity;
+        beer.type = req.body.type || beer.type;
+
+        await beer.save();
+        console.log("PUT new: " + beer);
+        return res.json(200, beer);
+    }
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

@@ -171,7 +171,7 @@ exports.putBeer = async function (req, res) {
     if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
     } else {
-        
+
         const beer = await Beer.findById(req.params.beer_id);
 
         if (!beer) {

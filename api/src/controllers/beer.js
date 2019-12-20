@@ -166,7 +166,7 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = async function (req, res) {
 
-    console.log("PUT body: " + req.body);
+    console.log("PUT body: " + JSON.stringify(req.body));
 
     const beer = await Beer.findById(req.params.beer_id);
     console.log("PUT current: " + beer);

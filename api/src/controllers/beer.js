@@ -144,7 +144,10 @@ exports.getBeer = function (req, res) {
 
         if (beer[0]) {
             const detail = {
-                item: beer[0],
+                _id: beer[0]._id,
+                title: beer[0].title,
+                quantity: beer[0].quantity,
+                type: beer[0].type,
                 _links: {
                     self: {
                         href: req.protocol + '://' + req.get('host') + req.originalUrl

@@ -164,27 +164,23 @@ exports.getBeer = function (req, res) {
 
 
 // Create endpoint /api/beers/:beer_id for PUT
-exports.putBeer = function (req, res) {
+exports.putBeer = async function (req, res) {
 
     console.log(req.body);
 
-    // Use the Beer model to find a specific beer
-    Beer.findOneAndUpdate({_id: req.params.beer_id}, {
-        $set: {
-            title: req.body.title,
-            type: req.body.type,
-            quantity: req.body.quantity
-        }
-    }, {new: true}).then((beer) => {
-        if (beer) {
+    const beer = await Beer.findById(req.params.beer_id);
 
-            res.json(200, beer)
-        } else {
-            console.error('biertje bestaat niet')
-        }
-    }).catch((err) => {
-        console.error(err);
-    })
+    if(!beer) {
+        console.error('biertje bestaat niet')
+        return;
+    }
+
+    beer.title = req.body.title || beer.title;
+    beer.quantity = req.body.quantity || beer.quantity;
+    beer.type = req.body.type || beer.type;
+
+    await beer.save();
+    return res.json(200, beer);
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

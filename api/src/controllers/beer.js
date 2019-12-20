@@ -165,9 +165,7 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = function (req, res) {
 
-    console.log(req.body)
-
-
+    console.log(req.body);
 
     // Use the Beer model to find a specific beer
     Beer.findOneAndUpdate({_id: req.params.beer_id}, {
@@ -178,43 +176,14 @@ exports.putBeer = function (req, res) {
         }
     }, {new: true}).then((beer) => {
         if (beer) {
-
-
-
-
+            
             res.json(200, beer)
         } else {
-            res.send({success: false, data: "no such user exist"});
+            console.error('biertje bestaat niet')
         }
     }).catch((err) => {
-        res.send(err);
+        console.error(err);
     })
-
-    // Beer.update({_id: req.params.beer_id}, {
-    //     title: req.body.title,
-    //     type: req.body.type,
-    //     quantity: req.body.quantity
-    // }, function (err, beer) {
-    //     if (err) {
-    //         res.send(err);
-    //     }
-    //     res.json(beer);
-    // });
-
-    // // Use the Beer model to find a specific beer
-    // Beer.findOneAndUpdate({_id: req.params.beer_id}, req.body,
-    //
-    //     // an option that asks mongoose to return the updated version of the document instead of the pre-updated one.
-    //     {new: true},
-    //
-    //     // the callback function
-    //     (err, beer) => {
-    //
-    //         console.log(beer)
-    //         // Handle any possible database errors
-    //         if (err) return res.status(500).send(err);
-    //         return res.send(beer);
-    //     })
 };
 
 // Create endpoint /api/beers/:beer_id for DELETE

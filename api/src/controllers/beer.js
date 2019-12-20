@@ -166,20 +166,22 @@ exports.getBeer = function (req, res) {
 // Create endpoint /api/beers/:beer_id for PUT
 exports.putBeer = async function (req, res) {
 
-    console.log(req.body);
+    console.log("PUT body: " + req.body);
 
     const beer = await Beer.findById(req.params.beer_id);
+    console.log("PUT current: " + beer);
 
     if(!beer) {
         console.error('biertje bestaat niet')
         return;
     }
 
-    beer.title = req.body.title === undefined ? beer.title : req.body.title;
-    beer.quantity = req.body.quantity === undefined ?  beer.quantity : req.body.quantity;
-    beer.type = req.body.type === undefined ?  beer.type : req.body.type;
+    beer.title = req.body.title || beer.title;
+    beer.quantity = req.body.quantity || beer.quantity;
+    beer.type = req.body.type || beer.type;
 
     await beer.save();
+    console.log("PUT new: " + beer);
     return res.json(200, beer);
 };
 

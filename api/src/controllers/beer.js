@@ -35,6 +35,7 @@ exports.optionsDetail = function (req, res, next) {
 exports.postBeers = function (req, res) {
 
 
+
     if (!req.body.title || !req.body.type || !req.body.quantity) {
         res.send(403);
     } else {
@@ -176,7 +177,7 @@ exports.putBeer = function (req, res) {
         }
     }, {new: true}).then((beer) => {
         if (beer) {
-            
+
             res.json(200, beer)
         } else {
             console.error('biertje bestaat niet')

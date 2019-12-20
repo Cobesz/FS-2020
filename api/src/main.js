@@ -20,9 +20,9 @@ const app = express();
 
 // Use the body-parser package in our application
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // app.use(cors());
 app.use(function (req, res, next) {

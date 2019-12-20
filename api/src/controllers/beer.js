@@ -175,9 +175,9 @@ exports.putBeer = async function (req, res) {
         return;
     }
 
-    beer.title = req.body.title || beer.title;
-    beer.quantity = req.body.quantity || beer.quantity;
-    beer.type = req.body.type || beer.type;
+    beer.title = req.body.title === undefined ? beer.title : req.body.title;
+    beer.quantity = req.body.quantity === undefined ?  beer.quantity : req.body.quantity;
+    beer.type = req.body.type === undefined ?  beer.type : req.body.type;
 
     await beer.save();
     return res.json(200, beer);

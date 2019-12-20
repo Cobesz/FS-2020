@@ -166,20 +166,17 @@ exports.getBeer = function (req, res) {
 exports.putBeer = function (req, res) {
 
 
-    Beer.update({_id: req.params.beer_id}, {
-        $set: {
+    Beer.findOneAndUpdate({_id: req.params.beer_id}, {$set: {
             title: req.body.title,
             type: req.body.type,
             quantity: req.body.quantity
+    }}, {new: true}).then((docs) => {
+        if (docs) {
+            res.send(docs);
+        } else {
+            res.send({success: false, data: "no such user exist"});
         }
-    }, {multi: true, new: true})
-        .then((docs) => {
-            if (docs) {
-                res.send({success: true, data: docs});
-            } else {
-                res.send({success: false, data: "no such beer exists"});
-            }
-        }).catch((err) => {
+    }).catch((err) => {
         res.send(err);
     })
 

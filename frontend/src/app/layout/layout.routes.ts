@@ -6,7 +6,12 @@ export let ModuleRoutes: Routes = [
     path: '', component: LayoutComponent,
     children: [{
       path: '',
-      loadChildren: '../modules/dashboard/dashboard.module#DashboardModule'
-    }]
+      loadChildren: '../modules/dashboard/dashboard.module#DashboardModule',
+    },
+      {
+        path: 'beercollection',
+        loadChildren: '../modules/beer-collection/beer-collection.module#BeerCollectionModule'
+      }
+    ]
   }
 ];

@@ -17,7 +17,7 @@
 
 
         :hover {
-          background-color :#1565c0 !important;
+          background-color: #1565c0 !important;
         }
       }
 
@@ -27,6 +27,19 @@
           color: #1565c0 !important;
         }
       }
+
+      .disabled-header-item {
+        opacity: 0.54;
+
+        :hover {
+          background-color: unset !important;
+          cursor: default;
+        }
+      }
     }
   }
+}
+
+.is-active-list-item {
+  background-color: #1565c0 !important;
 }

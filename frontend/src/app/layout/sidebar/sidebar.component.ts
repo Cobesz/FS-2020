@@ -12,11 +12,15 @@ export class SidebarComponent implements OnInit {
     [
       {
         "name": "Dashboard",
-        "icon": "view_compact"
+        "icon": "view_compact",
+        link: '#',
+        disabled: true
       },
       {
         "name": "Beer collection",
-        "icon": "collections"
+        "icon": "collections",
+        link: '/beercollection',
+        disabled: false
       },
       {
         "name": "",
@@ -25,7 +29,9 @@ export class SidebarComponent implements OnInit {
       },
       {
         "name": "Other link",
-        "icon": "person_pin"
+        "icon": "person_pin",
+        link: '#',
+        disabled: true
       },
     ];
 

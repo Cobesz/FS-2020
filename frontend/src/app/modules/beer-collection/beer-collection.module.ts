@@ -11,6 +11,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ScrollingModule,
     MatTableModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
   ]
 })
 export class BeerCollectionModule {

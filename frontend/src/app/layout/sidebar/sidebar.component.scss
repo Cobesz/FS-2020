@@ -4,20 +4,37 @@ mat-list {
 
   .nested-sidebarItems {
 
-    :focus {
-      outline: none !important;
+    .list-items {
 
+      cursor: pointer !important;
     }
 
+    :focus {
+      outline: none !important;
+    }
+
+
     .mat-list-item {
-      font-size: 12px;
-      height: 2.6em;
+      font-size: 14px;
+      height: 2.5em;
       display: block;
 
       i {
-        padding-right: 0.30em;
-
+        padding-right: 0.30em
       }
+
+      p {
+        font-size: 11px;
+        font-weight: 100;
+      }
+
+      h4 {
+        padding-left: 0.8em;
+      }
+    }
+
+    .header-items {
+      height: 2em;
     }
   }
 }

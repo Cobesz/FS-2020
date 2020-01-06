@@ -8,6 +8,12 @@ mat-card {
   }
 
   mat-card-content {
-      margin: 1rem;
+    margin: 1rem;
+  }
+
+  mat-card-actions {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
   }
 }

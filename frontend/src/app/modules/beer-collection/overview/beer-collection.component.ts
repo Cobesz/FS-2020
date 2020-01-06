@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
+import {BeerLockerService} from "../../../core/services/api/beer-locker.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,23 +9,29 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class BeerCollectionComponent implements OnInit {
 
-  public requests = new MatTableDataSource([{
-    id: 1,
-    date: Date(),
-    type: 'Test type',
-    status: 'Test Status',
-  }]);
+  public beers;
 
 
   private selectedEntries: object = {};
 
   public displayedColumns: string[] = ['selectBox', 'importDate', 'type', 'status'];
 
-  constructor() {
+  constructor(private beerLockerService: BeerLockerService) {
   }
 
   ngOnInit() {
-    console.log(this.requests);
+
+    this.beerLockerService.getAll().subscribe(beers => {
+      console.log(beers);
+
+      this.beers = new MatTableDataSource(beers);
+    })
+
+
+  }
+
+  private loadBeers() {
+
   }
 
   public changeRowFocusState(rowData, event) {

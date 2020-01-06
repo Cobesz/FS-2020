@@ -1,0 +1,12 @@
+<mat-list>
+    <div class="nested-sidebarItems" *ngFor="let sidebarmenuItem of sidebarmenuItems">
+        <mat-list-item class="list-items" *ngIf="!sidebarmenuItem.header" routerLink="/test">
+            <i class="material-icons">{{sidebarmenuItem.icon}}</i>
+            {{sidebarmenuItem.name}}
+        </mat-list-item>
+        <mat-list-item class="header-items" *ngIf="sidebarmenuItem.header">
+            <h4>{{sidebarmenuItem.header}}</h4>
+            {{sidebarmenuItem.name}}
+        </mat-list-item>
+    </div>
+</mat-list>

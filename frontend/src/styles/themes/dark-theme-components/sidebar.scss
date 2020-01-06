@@ -1,0 +1,32 @@
+.mat-drawer {
+  background-color: #2d2d2d !important;
+}
+
+.mat-drawer-container {
+  background-color: #2d2d2d !important;
+
+  mat-sidenav {
+
+    .nested-sidebarItems {
+
+      :focus {
+        background-color: #1565c0 !important;
+      }
+
+      .list-items {
+
+
+        :hover {
+          background-color :#1565c0 !important;
+        }
+      }
+
+      .header-items {
+
+        h4 {
+          color: #1565c0 !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.topbar {
+  position: relative;
+  width: 100%;
+  height: 9vh;
+  //background: #212121;
+
+  img {
+    height: 2em;
+    margin: 1.5em 1.188em;
+  }
+}
+
+.userLoggedIn {
+  float: right;
+
+  .username {
+    position: absolute;
+    right: 6em;
+    top: 1.625em;
+    color: #FFFFFF;
+  }
+
+  .avatar {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    right: 0.75em;
+    top: 0.75em;
+  }
+}
+

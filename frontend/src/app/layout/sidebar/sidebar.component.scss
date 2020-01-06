@@ -1,0 +1,23 @@
+mat-list {
+
+  padding-top: 0 !important;
+
+  .nested-sidebarItems {
+
+    :focus {
+      outline: none !important;
+
+    }
+
+    .mat-list-item {
+      font-size: 12px;
+      height: 2.6em;
+      display: block;
+
+      i {
+        padding-right: 0.30em;
+
+      }
+    }
+  }
+}

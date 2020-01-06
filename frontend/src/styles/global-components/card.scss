@@ -1,0 +1,13 @@
+mat-card {
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+
+  mat-card-header mat-card-title {
+    margin-top: 10px;
+  }
+
+  mat-card-content {
+      margin: 1rem;
+  }
+}

@@ -1,7 +1,10 @@
-.mat-drawer {
-  background-color: #2d2d2d !important;
-}
+//Toolbar
+@import "dark-theme-components/toolbar";
 
-.mat-drawer-container {
-  background-color: #2d2d2d !important;;
-}
+// Sidebar
+@import "dark-theme-components/sidebar";
+
+// Tables
+@import "dark-theme-components/tables";
+
+@import "dark-theme-components/dialog";

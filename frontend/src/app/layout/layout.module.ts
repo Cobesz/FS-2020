@@ -5,20 +5,39 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {TopbarComponent} from './topbar/topbar.component';
 import {RouterModule} from '@angular/router';
 import {ModuleRoutes} from './layout.routes';
-import {MatSidenavModule, MatSlideToggleModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatCardModule,
+  MatCheckboxModule, MatDialogModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
+import {DialogComponent} from '../shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     TopbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(ModuleRoutes),
     MatToolbarModule,
     MatSlideToggleModule,
-    MatSidenavModule
-  ]
+    MatSidenavModule,
+    MatTableModule,
+    MatListModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule
+  ],
+  entryComponents: [DialogComponent],
 })
 export class LayoutModule { }

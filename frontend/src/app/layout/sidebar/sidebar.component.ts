@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +7,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+
+  private sidebarmenuItems: Array<object> =
+    [
+      {
+        "name": "Dashboard",
+        "icon": "view_compact"
+      },
+      {
+        "name": "Beer collection",
+        "icon": "collections"
+      },
+      {
+        "name": "",
+        "icon": "",
+        "header": "OTHER STUFF"
+      },
+      {
+        "name": "Other link",
+        "icon": "person_pin"
+      },
+    ];
+
+
+  constructor() {
+
+  }
+
 
   ngOnInit() {
+
   }
 
 }
+
+
+

@@ -7,6 +7,10 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {BeerDetailComponent} from "./detail/beer-detail.component";
 import {MatButtonModule} from "@angular/material/button";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import {MatButtonModule} from "@angular/material/button";
     RouterModule.forChild(ModuleRoutes),
     MatCardModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    ScrollingModule,
+    MatTableModule,
+    MatSortModule,
+    MatCheckboxModule
   ]
 })
 export class BeerCollectionModule {

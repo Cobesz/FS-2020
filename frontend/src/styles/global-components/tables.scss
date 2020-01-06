@@ -1,0 +1,70 @@
+.noSearch {
+  top: 0 !important;
+  right: 0 !important;
+  position: absolute !important;
+}
+
+h1 {
+  margin: 1rem;
+}
+
+table {
+  position: absolute;
+  top: 0;
+  margin: 1em 0 0 0;
+  width: 100%;
+}
+
+
+.invitationLettersCard {
+  table {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.scrollTable {
+  height: 70vh;
+
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+
+  overflow-y: auto;
+  -ms-overflow-y: auto;
+
+  mat-checkbox {
+    margin-left: 24px;
+  }
+}
+
+.scrollTable::-webkit-scrollbar {
+  width: 0;
+}
+
+.scroll-indicator-icon {
+  position: fixed !important;
+  right: 17em !important;
+  bottom: 0.25em !important;
+  font-size: 50px;
+  animation: bounce .5s alternate infinite ease-in;
+}
+
+.requestsTable {
+  width: 100% !important;
+  margin: 0 !important;
+
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+
+
+@keyframes bounce {
+  0% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(-5%);
+  }
+}

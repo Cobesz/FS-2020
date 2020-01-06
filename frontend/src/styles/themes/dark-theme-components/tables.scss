@@ -1,3 +1,23 @@
 tr:hover, .selectedRow {
   background-color: #2d2d2d !important;
 }
+
+.mat-header-row:hover {
+  background-color: inherit !important;
+}
+
+
+.inactiveIndicatorHeader {
+  padding-left: 5px !important;
+}
+
+.inactiveCell {
+  padding-left: 0 !important;
+}
+
+.inactiveIndicator {
+  background-color: red;
+  padding-left: 0px !important;
+  width: 3px;
+  height: 47px;
+}

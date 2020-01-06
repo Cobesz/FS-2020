@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'fs2020'`, () => {
+  it(`should have as title 'mis-angular-frontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('fs2020');
+    expect(app.title).toEqual('mis-angular-frontend');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to fs2020!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to mis-angular-frontend!');
   });
 });

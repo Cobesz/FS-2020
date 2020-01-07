@@ -66,10 +66,6 @@ exports.getBeers = function (req, res, next) {
     let page = req.query.start;
 
     const urlSelf = req.protocol + '://' + req.get('host') + '/api/beers';
-    console.log(urlSelf);
-    console.log(page);
-    console.log(perPage);
-    console.log(req);
 
     if (req.query.start === '' || req.query.limit === '') {
         perPage = 10;

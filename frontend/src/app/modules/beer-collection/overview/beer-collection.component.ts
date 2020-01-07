@@ -1,42 +1,59 @@
-import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
+import {AfterViewInit, Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 import {BeerLockerService} from "../../../core/services/api/beer-locker.service";
+import {CdkScrollable, CdkVirtualScrollViewport, ScrollDispatcher} from "@angular/cdk/scrolling";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './beer-collection.component.html',
   styleUrls: ['./beer-collection.component.scss']
 })
-export class BeerCollectionComponent implements OnInit {
+export class BeerCollectionComponent implements OnInit, AfterViewInit {
 
   public beers;
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   private selectedEntries: object = {};
+  public displayedColumns: string[] = ['selectBox', 'name', 'type', 'quantity'];
+  private currentPage = 1;
+  @Output()
+  public clickedBeer = new EventEmitter();
 
-  public displayedColumns: string[] = ['selectBox', 'importDate', 'type', 'status'];
 
-  constructor(private beerLockerService: BeerLockerService) {
+
+  constructor(private beerLockerService: BeerLockerService,
+              private scrollDispatcher: ScrollDispatcher,
+              private zone: NgZone) {
   }
 
   ngOnInit() {
+    this.loadBeers();
+  }
 
-    this.beerLockerService.getAll().subscribe(beers => {
+  public ngAfterViewInit(): void {
+    // this.showScrollIndicator();
+  }
+
+
+
+  private loadBeers(sortBy: string = null, sortDir = null, reset = false) {
+    if (reset) {
+      this.currentPage = 1;
+    }
+
+    this.beerLockerService.getAll(this.currentPage, 20).subscribe(beers => {
       console.log(beers);
 
       this.beers = new MatTableDataSource(beers);
-    })
-
-
+      this.beers.paginator = this.paginator;
+    });
   }
 
-  private loadBeers() {
-
-  }
-
-  public changeRowFocusState(rowData, event) {
-
-    const tr = document.getElementById(event.source.id).closest('tr'); // Finding the correct element based on ID from the event
+  public changeRowFocusState(rowData, event, target?) {
+    let tr = target || document.getElementById(event.source.id);
+    tr = tr.closest('tr');
 
     if (this.selectedEntries.hasOwnProperty(rowData.id)) {
       delete this.selectedEntries[rowData.id];
@@ -50,6 +67,8 @@ export class BeerCollectionComponent implements OnInit {
     } else {
       tr.className = 'mat-row ng-star-inserted'; // remove the selectedRow class
     }
+
+    this.clickedBeer.emit({patientId: rowData.id, isCheckbox: !target});
   }
 
 }

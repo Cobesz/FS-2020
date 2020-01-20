@@ -20,13 +20,15 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {EditDialogComponent} from "../shared/edit-dialog/edit-dialog.component";
 
 @NgModule({
   declarations: [
     LayoutComponent,
     TopbarComponent,
     SidebarComponent,
-    DialogComponent
+    DialogComponent,
+    EditDialogComponent
   ],
   imports: [
     CommonModule,
@@ -44,8 +46,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, EditDialogComponent],
 })
 export class LayoutModule { }

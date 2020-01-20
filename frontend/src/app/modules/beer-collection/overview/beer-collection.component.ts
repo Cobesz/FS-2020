@@ -45,8 +45,6 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
     }
 
     this.beerLockerService.getAll(this.currentPage, 99).subscribe(beers => {
-      console.log(beers);
-
       this.beers = new MatTableDataSource(beers);
       this.beers.paginator = this.paginator;
     });
@@ -81,7 +79,7 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // if (result) {
-        this.loadBeers();
+      this.loadBeers();
       // }
     });
   }

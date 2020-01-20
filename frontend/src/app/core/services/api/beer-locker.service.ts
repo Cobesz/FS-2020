@@ -18,18 +18,28 @@ export class BeerLockerService {
     }));
   }
 
+  getOne(beerId): Observable<any> {
+    return this.http.get(environment.apiUrl + '/beers/' + beerId);
+  }
+
   createBeer(title, type, quantity): Observable<any> {
-    console.log(environment.apiUrl);
-    console.log(title);
-    console.log(type);
-    console.log(quantity);
 
     const payload = new HttpParams()
       .set('title', title)
       .set('type', type)
-      .set('quantity', quantity)
+      .set('quantity', quantity);
 
     return this.http.post(environment.apiUrl + '/beers', payload);
+  }
+
+  editBeer(id, title, type, quantity): Observable<any> {
+
+    const payload = new HttpParams()
+      .set('title', title)
+      .set('type', type)
+      .set('quantity', quantity);
+
+    return this.http.put(environment.apiUrl + '/beers/' + id, payload);
   }
 }
 

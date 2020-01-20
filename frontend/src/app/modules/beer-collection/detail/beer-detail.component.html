@@ -1,12 +1,16 @@
 <mat-grid-list cols="10">
-  <mat-grid-tile colspan="2" rowspan="2">
-    <mat-card>
+  <mat-grid-tile colspan="10" rowspan="2">
+    <mat-card *ngIf="beer">
       <mat-card-header>
-        <mat-card-title>Single beer - name X</mat-card-title>
+        <mat-card-title>{{beer.title}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        Lorem ipsum, beersum lotsum
+        <p>Type: {{beer.type}}</p>
+        <p>Aantal: {{beer.quantity}}</p>
       </mat-card-content>
+      <button (click)="openDialog()" class="createFAB" color="primary" mat-fab>
+        <mat-icon aria-hidden="false">edit</mat-icon>
+      </button>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

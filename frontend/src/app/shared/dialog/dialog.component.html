@@ -18,7 +18,7 @@
       <div class="inputRow">
         <mat-form-field>
           <mat-label>Type</mat-label>
-          <mat-select formControlName="quantity" required>
+          <mat-select formControlName="type" required>
             <mat-option *ngFor="let item of type" [value]="item.value" style="background-color: #484848; color: white">
               {{item.display}}
             </mat-option>
@@ -36,6 +36,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="close()" class="btn addCard-button">Terug</button>
-    <button mat-raised-button color="primary" (click)="close()" class="btn addCard-button">Toevoegen</button>
+    <button mat-raised-button color="primary" (click)="save()" class="btn addCard-button">Confirm</button>
   </mat-card-actions>
 </mat-card>

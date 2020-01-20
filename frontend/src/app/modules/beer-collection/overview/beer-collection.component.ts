@@ -44,7 +44,7 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
       this.currentPage = 1;
     }
 
-    this.beerLockerService.getAll(this.currentPage, 20).subscribe(beers => {
+    this.beerLockerService.getAll(this.currentPage, 99).subscribe(beers => {
       console.log(beers);
 
       this.beers = new MatTableDataSource(beers);
@@ -80,9 +80,9 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // this.loadHealthcareGroups();
-      }
+      // if (result) {
+        this.loadBeers();
+      // }
     });
   }
 

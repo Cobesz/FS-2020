@@ -12,24 +12,26 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
     BeerCollectionComponent,
     BeerDetailComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(ModuleRoutes),
-    MatCardModule,
-    MatGridListModule,
-    MatButtonModule,
-    ScrollingModule,
-    MatTableModule,
-    MatSortModule,
-    MatCheckboxModule,
-    MatPaginatorModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(ModuleRoutes),
+        MatCardModule,
+        MatGridListModule,
+        MatButtonModule,
+        ScrollingModule,
+        MatTableModule,
+        MatSortModule,
+        MatCheckboxModule,
+        MatPaginatorModule,
+        MatIconModule
+    ]
 })
 export class BeerCollectionModule {
 }

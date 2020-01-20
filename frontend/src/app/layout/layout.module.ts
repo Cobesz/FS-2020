@@ -16,6 +16,10 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {DialogComponent} from '../shared/dialog/dialog.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import {DialogComponent} from '../shared/dialog/dialog.component';
     MatCheckboxModule,
     MatButtonModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule
   ],
   entryComponents: [DialogComponent],
 })

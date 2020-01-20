@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {EditDialogComponent} from "../shared/edit-dialog/edit-dialog.component";
+import {DeleteDialogComponent} from "../shared/delete-dialog/delete-dialog.component";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {EditDialogComponent} from "../shared/edit-dialog/edit-dialog.component";
     TopbarComponent,
     SidebarComponent,
     DialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,6 @@ import {EditDialogComponent} from "../shared/edit-dialog/edit-dialog.component";
     MatInputModule,
     MatSelectModule,
   ],
-  entryComponents: [DialogComponent, EditDialogComponent],
+  entryComponents: [DialogComponent, EditDialogComponent, DeleteDialogComponent],
 })
 export class LayoutModule { }

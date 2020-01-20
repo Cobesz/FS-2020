@@ -3,6 +3,7 @@
     <mat-card *ngIf="beer">
       <mat-card-header>
         <mat-card-title>{{beer.title}}</mat-card-title>
+        <mat-icon (click)="openDeleteDialog()">delete</mat-icon>
       </mat-card-header>
       <mat-card-content>
         <p>Type: {{beer.type}}</p>

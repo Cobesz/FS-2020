@@ -10,12 +10,9 @@ import {
 } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {BeerLockerService} from "../../core/services/api/beer-locker.service";
 
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-dialog',
@@ -32,9 +29,33 @@ export class DialogComponent implements OnInit, OnDestroy {
   visible: boolean = true;
   breakpoint: number = 520;
 
+  public generalFormGroup: FormGroup;
+
+  public type = [{
+    value: 'pils',
+    display: 'Pils'
+  }, {
+    value: 'blond',
+    display: 'Blond'
+  }, {
+    value: 'dubbel',
+    display: 'Dubbel'
+  }, {
+    value: 'tripple',
+    display: 'Tripple'
+  }, {
+    value: 'trappist',
+    display: 'Trappist'
+  }, {
+    value: 'ipa',
+    display: 'IPA'
+  }];
+
   constructor(private router: Router,
+              private formBuilder: FormBuilder,
               public dialogRef: MatDialogRef<DialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+              private beerLockerService: BeerLockerService,
+              @Inject(MAT_DIALOG_DATA) public data) {
   }
 
   ngOnInit() {
@@ -45,6 +66,12 @@ export class DialogComponent implements OnInit, OnDestroy {
       // whenever the window is less than 520, hide this component.
       this.visible = false;
     }
+
+    this.generalFormGroup = this.formBuilder.group({
+      title: ['', Validators.required],
+      type: ['', Validators.required],
+      quantity: ['', Validators.required],
+    });
   }
 
   ngOnDestroy(): void {
@@ -64,5 +91,17 @@ export class DialogComponent implements OnInit, OnDestroy {
 
   close() {
     this.dialogRef.close();
+  }
+
+  save() {
+    const title = this.generalFormGroup.get('title').value;
+    const type = this.generalFormGroup.get('type').value;
+    const quantity = this.generalFormGroup.get('quantity').value;
+    this.beerLockerService.createBeer(title, type, quantity).subscribe(beer => {
+      console.log(beer);
+      if (beer) {
+        this.dialogRef.close()
+      }
+    })
   }
 }

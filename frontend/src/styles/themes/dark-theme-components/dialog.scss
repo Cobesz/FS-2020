@@ -1,3 +1,15 @@
-.mat-dialog-container {
-  padding: 0 !important;
+.DialogComponent {
+
+  mat-dialog-content {
+    background-color: #212121 !important;
+  }
+
+  .mat-dialog-container {
+    background-color: #212121 !important;
+  }
+
+  .mat-dialog-container {
+    padding: 0 !important;
+    background: #212121 !important;
+  }
 }

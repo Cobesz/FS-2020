@@ -3,6 +3,8 @@ import {BeerLockerService} from "../../../core/services/api/beer-locker.service"
 import {CdkScrollable, CdkVirtualScrollViewport, ScrollDispatcher} from "@angular/cdk/scrolling";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {DialogComponent} from "../../../shared/dialog/dialog.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +24,8 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
   public clickedBeer = new EventEmitter();
 
 
-
   constructor(private beerLockerService: BeerLockerService,
+              public dialog: MatDialog,
               private scrollDispatcher: ScrollDispatcher,
               private zone: NgZone) {
   }
@@ -37,13 +39,12 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
   }
 
 
-
   private loadBeers(sortBy: string = null, sortDir = null, reset = false) {
     if (reset) {
       this.currentPage = 1;
     }
 
-    this.beerLockerService.getAll(this.currentPage, 20).subscribe(beers => {
+    this.beerLockerService.getAll(this.currentPage, 99).subscribe(beers => {
       console.log(beers);
 
       this.beers = new MatTableDataSource(beers);
@@ -69,6 +70,20 @@ export class BeerCollectionComponent implements OnInit, AfterViewInit {
     }
 
     this.clickedBeer.emit({patientId: rowData.id, isCheckbox: !target});
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '45vw',
+      disableClose: true,
+      panelClass: 'DialogComponent'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // if (result) {
+        this.loadBeers();
+      // }
+    });
   }
 
 }

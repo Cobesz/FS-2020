@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {map} from "rxjs/operators";
@@ -16,6 +16,20 @@ export class BeerLockerService {
     return this.http.get(`${environment.apiUrl}/beers?start=${pageIndex}&limit=${pageSize}`).pipe(map(beers => {
       return (beers as any).items;
     }));
+  }
+
+  createBeer(title, type, quantity): Observable<any> {
+    console.log(environment.apiUrl);
+    console.log(title);
+    console.log(type);
+    console.log(quantity);
+
+    const payload = new HttpParams()
+      .set('title', title)
+      .set('type', type)
+      .set('quantity', quantity)
+
+    return this.http.post(environment.apiUrl + '/beers', payload);
   }
 }
 

@@ -2,6 +2,12 @@ mat-card {
   height: 100%;
   width: 100%;
   padding: 0 !important;
+  background-color: #484848 !important;
+
+
+  mat-card-title, mat-card-subtitle {
+    color: white !important;
+  }
 
   mat-card-header mat-card-title {
     margin-top: 10px;
@@ -9,11 +15,101 @@ mat-card {
 
   mat-card-content {
     margin: 1rem;
+    background-color: #484848;
+
+    p {
+      color: white;
+    }
   }
 
   mat-card-actions {
     position: absolute;
     right: 1em;
     bottom: 1em;
+
+    .mat-button {
+      color: white;
+    }
+  }
+}
+
+mat-card-header {
+  background-color: #484848;
+}
+
+mat-tab-header {
+  background-color: #484848;
+}
+
+.mat-tab-body {
+  margin: 1em;
+}
+
+
+mat-dialog-content {
+  background-color: #484848 !important;
+
+}
+
+mat-form-field {
+  color: white;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: white !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+  background: #484848 !important;
+}
+
+
+.inputRow {
+
+  display: flex !important;
+
+  mat-form-field:last-child {
+    flex-grow: 1 !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+
+
+  .inputSpacing {
+    flex: 1;
+    margin: 0 1vw 0 0;
+  }
+
+
+  .smallInput {
+    max-width: calc(100% - 35vw) !important;
+  }
+
+  .normalInput {
+    max-width: calc(100% - 30vw) !important;
+  }
+
+  .halfwayInput {
+    max-width: calc(100% - 24vw) !important;
+  }
+
+  .largeInput {
+    width: calc(100% - 20vw) !important;
+  }
+}
+
+::ng-deep .mat-select-content {
+  background-color: #484848 !important;
+}
+
+.mat-select-value {
+  color: white !important;
+}
+
+.DialogComponent {
+  mat-card {
+    height: 35vh;
   }
 }

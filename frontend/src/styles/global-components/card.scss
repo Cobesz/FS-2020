@@ -4,9 +4,16 @@ mat-card {
   padding: 0 !important;
   background-color: #484848 !important;
 
-mat-card-header {
-  background-color: #212121 !important;
-}
+  mat-card-header {
+    background-color: #212121 !important;
+
+    mat-icon {
+      right: 10px !important;
+      position: absolute !important;
+      top: 10px !important;
+      cursor: pointer !important;
+    }
+  }
 
   mat-card-title, mat-card-subtitle {
     color: white !important;
@@ -114,5 +121,11 @@ mat-form-field {
 .DialogComponent, .EditDialogComponent {
   mat-card {
     height: 35vh;
+  }
+}
+
+.DeleteDialogComponent {
+  mat-card {
+    height: 20vh;
   }
 }

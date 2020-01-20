@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BeerLockerService} from "../../../core/services/api/beer-locker.service";
 import {DialogComponent} from "../../../shared/dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {EditDialogComponent} from "../../../shared/edit-dialog/edit-dialog.component";
+import {DeleteDialogComponent} from "../../../shared/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class BeerDetailComponent implements OnInit {
   private beerId;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               public dialog: MatDialog,
               private beerLockerService: BeerLockerService,) {
   }
@@ -23,6 +25,8 @@ export class BeerDetailComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe(params => {
+      console.log(this.route);
+      console.log(this.router);
       this.beerId = params.id;
       this.loadBeer(this.beerId);
     });
@@ -47,6 +51,22 @@ export class BeerDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadBeer(this.beerId);
+    });
+  }
+
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '25vw',
+      disableClose: true,
+      panelClass: 'DeleteDialogComponent',
+      data: {
+        id: this.beerId,
+        beer: this.beer,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['/beercollection']);
     });
   }
 }

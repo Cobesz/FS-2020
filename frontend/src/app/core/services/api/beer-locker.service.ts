@@ -41,6 +41,11 @@ export class BeerLockerService {
 
     return this.http.put(environment.apiUrl + '/beers/' + id, payload);
   }
+
+  deleteBeer(id): Observable<any> {
+
+    return this.http.delete(environment.apiUrl + '/beers/' + id);
+  }
 }
 
 

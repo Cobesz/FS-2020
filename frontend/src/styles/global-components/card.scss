@@ -4,6 +4,9 @@ mat-card {
   padding: 0 !important;
   background-color: #484848 !important;
 
+mat-card-header {
+  background-color: #212121 !important;
+}
 
   mat-card-title, mat-card-subtitle {
     color: white !important;
@@ -108,7 +111,7 @@ mat-form-field {
   color: white !important;
 }
 
-.DialogComponent {
+.DialogComponent, .EditDialogComponent {
   mat-card {
     height: 35vh;
   }

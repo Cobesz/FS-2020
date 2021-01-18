@@ -5,7 +5,8 @@ import bodyParser from "body-parser";
 import router from "./router";
 import cors from "cors";
 import paginate from "express-paginate";
-// Connect to the beerlocker MongoDB
+
+// Connect to the beerlocker Database
 mongoose.connect('mongodb://localhost:27017/beerlocker',
     {
         useNewUrlParser: true,
